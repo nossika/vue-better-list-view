@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>list-view example</title>
+    <style>
+        .container {
+            height: 400px;
+            width: 500px;
+            margin: 50px auto;
+            border: 1px solid #eee;
+        }
+        .item {
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+<section id="app">
+    <section class="container">
+        <list-view
+            ref="list-view"
+            @scroll="listScroll"
+            :list="list"
+            :item-height-getter="itemHeightGetter"
+            :default-item-height="defaultItemHeight"
+        >
+            <div slot-scope="scope" class="item">
+                <div :style="{color: scope.item.color}">
+                    NO: {{ scope.item.no }}, height: {{ scope.height }}px, offset: {{scope.offset}}px
+                </div>
+            </div>
+        </list-view>
+    </section>
+</section>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16"></script>
+<script src="./umd/list-view.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data () {
+            return {
+                list: [],
+                page: 0,
+                itemHeightGetter (item, index) {
+                    if (item.no % 33 === 0) {
+                        return 100;
+                    }
+                    return 20 + item.no % 10;
+                },
+                defaultItemHeight: 30,
+            }
+        },
+        methods: {
+            listScroll (data) {
+                if (!this._getting && data.bottomItemIndex >= this.list.length - 3) {
+                    this._getting = true;
+                    this.getData().then(d => {
+                        this.list.push(...d);
+                        this.page++;
+                        this._getting = false;
+                    });
+                }
+            },
+            getData () {
+                return new Promise(resolve => {
+                    setTimeout(() => {
+                        const baseIndex = this.page * 2000;
+                        resolve(new Array(2000).fill(0).map((i, index) => {
+                            return {
+                                no: baseIndex + index,
+                                color: ['#33d', '#3d3', '#d33', '#333'][Math.random() * 4 | 0],
+                            };
+                        }));
+                    }, 100);
+                })
+            },
+        },
+        created () {
+            this.getData().then(d => {
+                this.list = d;
+            });
+        },
+    });
+</script>
+</body>
+</html>

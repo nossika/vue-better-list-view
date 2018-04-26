@@ -1,5 +1,5 @@
 <template>
-    <div ref="wrapper" @scroll="refreshView(false)" style="width: 100%; height: 100%; overflow: auto; position: relative; margin: 0; padding: 0; border: none;">
+    <div ref="wrapper" @scroll="refreshView()" style="width: 100%; height: 100%; overflow: auto; position: relative; margin: 0; padding: 0; border: none;">
         <div
             :style="{height: listTotalHeight + 'px'}"
             style="width: 100%; padding: 0; margin: 0;"
@@ -54,10 +54,14 @@ export default {
     },
     methods: {
         // 重渲染可视列表（可供组件外部调用）
-        refreshView (reset) {
-            if (reset) { // 如果强制reset，对可视窗口高度重新取值，并清空缓存
-                this._viewHeight = this.$refs.wrapper.clientHeight;
-                this.itemOffsetCache = [];
+        refreshView (config) {
+            if (config) {
+                if (config.resize) { // 只有resize为true时对wrapper高度重新取值，减少DOM取值操作
+                    this._viewHeight = this.$refs.wrapper.clientHeight;
+                }
+                if (config.clearCache) { // 清空缓存
+                    this.itemOffsetCache = [];
+                }
             }
             const scrollTop = this.$refs.wrapper.scrollTop; // 当前scrollTop
             const viewHeight = this._viewHeight; // 可视窗口高度
@@ -139,7 +143,7 @@ export default {
         },
     },
     mounted () {
-        this.refreshView(true);
+        this.refreshView({ resize: true });
     },
 }
 </script>

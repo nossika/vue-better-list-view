@@ -4,7 +4,7 @@ const webpack = require('webpack');
 
 module.exports = {
     entry: {
-        'test': path.resolve(__dirname, 'src/test'),
+        'test': path.resolve(__dirname, 'dev/index'),
     },
     output: {
         filename: '[name].js',
@@ -41,7 +41,7 @@ module.exports = {
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
         new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, 'src/test.html'),
+            template: path.resolve(__dirname, 'dev/index.html'),
             inject: 'body',
         }),
     ],

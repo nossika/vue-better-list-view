@@ -7,10 +7,10 @@ const listView = {
 };
 
 
-if (window.Vue) {
+if (window && window.Vue) {
     window.Vue.use(listView);
 }
 
-window.listView = listView;
+export { listView }
 
 

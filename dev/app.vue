@@ -15,6 +15,7 @@
 </template>
 <script>
 import listView from '../packages/list-view.vue';
+
 export default {
     components: {
         listView,

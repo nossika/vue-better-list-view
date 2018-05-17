@@ -1,16 +1,18 @@
 {
-  "name": "vue-list-view",
-  "version": "0.1.0",
+  "name": "vue-better-list-view11",
+  "version": "0.1.1",
   "description": "",
-  "main": "umd/list-view.js",
+  "main": "dist/list-view.js",
   "scripts": {
     "dev": "webpack-dev-server --config webpack.dev.config.js",
-    "build": "webpack --progress --config webpack.build.config.js"
+    "build": "webpack --progress --config webpack.build.config.js",
+    "build:umd": "webpack --progress --config webpack.build-umd.config.js"
   },
   "author": "nossika",
   "license": "ISC",
   "dependencies": {
-    "vue": "^2.5.16"
+    "vue": "^2.5.16",
+    "vue-better-list-view": "^0.1.1"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

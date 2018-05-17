@@ -3,7 +3,7 @@ const webpack = require('webpack');
 
 module.exports = {
     entry: {
-        'list-view': path.resolve(__dirname, 'packages/list-view.vue'),
+        'list-view-umd': path.resolve(__dirname, 'src/list-view-umd'),
     },
     output: {
         filename: '[name].js',

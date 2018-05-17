@@ -1,23 +1,27 @@
-# vue-list-view
+# vue-better-list-view
 
-vue长列表按需渲染，[DEMO](https://nossika.github.io/vue-list-view/umd-example.html)
+vue长列表按需渲染，[DEMO](https://nossika.github.io/vue-better-list-view/dev/umd-example.html)
 
-## 示例
+## 使用
 
-提供.vue单文件版本和umd版本。
+提供npm版本和umd版本
 
-.vue 引入：
+npm 安装
 
-    import listView from 'list-view.vue';
+    // install
+    npm i vue-better-list-view --save-dev
+
+    // in your project
+    import listView from 'vue-better-list-view'
     
-umd 引入：
+或 umd 引入
 
-    <script src="list-view.js"></script>
+    <script src="list-view-umd.js"></script>
     <script>
         Vue.use(listView);
     </script>
 
-使用：
+用法示例：
 
     <section style="height: 400px;">
         <list-view
@@ -33,7 +37,10 @@ umd 引入：
             </div>
         </list-view>
     </section>
-    
+
+调试：
+
+    npm run dev
     
 ## API
 
